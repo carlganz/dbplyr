@@ -312,6 +312,10 @@ simulate_mssql <- function(version = "15.0") {
       # https://docs.microsoft.com/en-us/sql/t-sql/functions/substring-transact-sql?view=sql-server-ver15
       str_sub = sql_str_sub("SUBSTRING", "LEN", optional_length = FALSE),
 
+      str_remove_all = function(string, pattern, replacement){
+        sql_expr(replace(!!string, !!pattern, ""))
+      },
+
       # lubridate ---------------------------------------------------------------
       # https://en.wikibooks.org/wiki/SQL_Dialects_Reference/Functions_and_expressions/Date_and_time_functions
       as_date = sql_cast("DATE"),
@@ -659,4 +663,4 @@ bit_to_boolean <- function(x_expr) {
   }
 }
 
-utils::globalVariables(c("BIT", "CAST", "%AS%", "%is%", "convert", "DATE", "DATEADD", "DATEFROMPARTS", "DATEDIFF", "DATENAME", "DATEPART", "IIF", "NOT", "SUBSTRING", "LTRIM", "RTRIM", "CHARINDEX", "SYSDATETIME", "SECOND", "MINUTE", "HOUR", "DAY", "DAYOFWEEK", "DAYOFYEAR", "MONTH", "QUARTER", "YEAR", "BIGINT", "INT", "%AND%", "%BETWEEN%"))
+utils::globalVariables(c("BIT", "CAST", "%AS%", "%is%", "convert", "DATE", "DATEADD", "DATEFROMPARTS", "DATEDIFF", "DATENAME", "DATEPART", "IIF", "NOT", "SUBSTRING", "LTRIM", "RTRIM", "CHARINDEX", "SYSDATETIME", "SECOND", "MINUTE", "HOUR", "DAY", "DAYOFWEEK", "DAYOFYEAR", "MONTH", "QUARTER", "YEAR", "BIGINT", "INT", "%AND%", "%BETWEEN%", "REPLACE"))
